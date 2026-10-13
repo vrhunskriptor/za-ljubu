@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta property="og:title" content="Срећан рођендан, љубо!">
+<meta property="og:description" content="Стигло ти је нешто. Додирни да отвориш.">
+<style>body{margin:0}</style>
+<title>Rođendansko iznenađenje</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&family=Pangolin&display=swap">
+<style>
+/* Layout: one centered stage per step (poklon → torta → čestitka), swapped in place; confetti canvas floats above. Single bright look on purpose. */
+:root{
+  --sun:#FFD84D;
+  --pink:#FF4F9A;
+  --mint:#3DD6B5;
+  --tang:#FF8A3D;
+  --sky:#7CC8FF;
+  --ink:#2A1240;
+  --paper:#FFFDF6;
+  --display:'Nunito','Arial Rounded MT Bold',system-ui,sans-serif;
+  --hand:'Pangolin','Comic Sans MS','Segoe Print',cursive;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{
+  background:radial-gradient(circle,rgba(255,253,246,.45) 3px,transparent 4px) 0 0/28px 28px,var(--sun);
+  color:var(--ink);font-family:var(--display);
+  -webkit-tap-highlight-color:transparent;
+}
+.app{min-height:100%;display:grid;place-items:center;padding-inline:16px;padding-block:28px;box-sizing:border-box}
+.stage{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;width:100%;max-width:440px;animation:pop .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(.85);opacity:.4}to{transform:none;opacity:1}}
+h1,h2,p{margin:0}
+.big{font-size:clamp(1.6rem,7vw,2.2rem);font-weight:900;line-height:1.05;text-wrap:balance}
+.hint{font-family:var(--hand);font-size:1.35rem;min-height:1.6em}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible{outline:3px dashed var(--ink);outline-offset:6px;border-radius:8px}
+
+/* ---------- poklon ---------- */
+.gift{position:relative;width:180px;height:190px;animation:wobble 1.8s ease-in-out infinite}
+@keyframes wobble{0%,60%,100%{transform:rotate(0)}68%{transform:rotate(-6deg)}76%{transform:rotate(6deg)}84%{transform:rotate(-4deg)}92%{transform:rotate(3deg)}}
+.gift .box{position:absolute;bottom:0;left:12px;width:156px;height:118px;background:var(--pink);border:4px solid var(--ink);border-radius:10px;box-sizing:border-box;overflow:hidden}
+.gift .box::before,.gift .lid::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:30px;transform:translateX(-50%);background:var(--mint);border-inline:4px solid var(--ink)}
+.gift .lid{position:absolute;top:44px;left:0;width:180px;height:42px;background:var(--pink);border:4px solid var(--ink);border-radius:10px;box-sizing:border-box;transition:transform .7s cubic-bezier(.3,1.4,.5,1),opacity .7s}
+.gift .bow{position:absolute;left:50%;bottom:100%;width:0;height:0}
+.gift .bow::before,.gift .bow::after{content:"";position:absolute;bottom:-6px;width:48px;height:34px;background:var(--mint);border:4px solid var(--ink);border-radius:50%}
+.gift .bow::before{right:-2px;transform:rotate(25deg);transform-origin:right bottom}
+.gift .bow::after{left:-2px;transform:rotate(-25deg);transform-origin:left bottom}
+.gift.open{animation:none}
+.gift.open .lid{transform:translate(60px,-170px) rotate(40deg);opacity:0}
+
+/* ---------- torta ---------- */
+.cake{position:relative;width:260px;height:250px}
+.plate{position:absolute;bottom:0;left:0;width:260px;height:16px;background:var(--paper);border:4px solid var(--ink);border-radius:50%;box-sizing:border-box}
+.tier{position:absolute;border:4px solid var(--ink);border-radius:16px;box-sizing:border-box;overflow:hidden}
+.tier.t1{bottom:10px;left:15px;width:230px;height:86px;background:var(--tang)}
+.tier.t2{bottom:92px;left:40px;width:180px;height:70px;background:var(--sky)}
+.tier::before{content:"";position:absolute;top:-2px;left:0;right:0;height:22px;background:
+  radial-gradient(circle at 12px 0,var(--paper) 13px,transparent 14px) 0 0/24px 22px repeat-x}
+.tier::after{content:"";position:absolute;left:10px;right:10px;bottom:16px;height:8px;background:
+  radial-gradient(circle,var(--pink) 4px,transparent 5px) 0 0/22px 8px repeat-x}
+.candles{position:absolute;bottom:158px;left:40px;width:180px;display:flex;justify-content:space-evenly}
+.candle{position:relative;width:34px;height:96px;display:flex;align-items:flex-end;justify-content:center}
+.stick{width:14px;height:46px;border:3px solid var(--ink);border-radius:4px;background:repeating-linear-gradient(-45deg,var(--paper) 0 6px,var(--pink) 6px 12px)}
+.flame{position:absolute;bottom:50px;left:50%;width:16px;height:26px;margin-left:-8px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;
+  background:radial-gradient(circle at 50% 70%,var(--paper) 0 25%,var(--sun) 45%,var(--tang) 80%);
+  box-shadow:0 0 14px 4px rgba(255,216,77,.8);transform-origin:50% 100%;animation:flicker .35s ease-in-out infinite alternate;transition:transform .25s,opacity .25s}
+@keyframes flicker{from{transform:rotate(-5deg) scaleY(1)}to{transform:rotate(5deg) scaleY(1.12)}}
+.candle.out .flame{animation:none;transform:scale(0);opacity:0}
+.smoke{position:absolute;bottom:52px;left:50%;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:rgba(42,18,64,.35);animation:smoke 1.2s ease-out forwards;pointer-events:none}
+@keyframes smoke{to{transform:translate(8px,-60px) scale(3);opacity:0}}
+
+/* ---------- čestitka ---------- */
+.card{background:var(--paper);border:4px solid var(--ink);border-radius:22px;box-shadow:8px 8px 0 var(--ink);padding:26px 20px 22px;display:flex;flex-direction:column;gap:16px;text-align:left;box-sizing:border-box;width:100%}
+.eyebrow{font-size:.8rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--pink)}
+.card h1{font-size:clamp(1.9rem,8.5vw,2.6rem);font-weight:900;line-height:1.05;text-wrap:balance}
+.card h1 span{color:var(--pink);display:inline-block;transform:rotate(-3deg)}
+.note{font-family:var(--hand);font-size:1.22rem;line-height:1.4;display:flex;flex-direction:column;gap:12px}
+.quotes{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.quotes li{padding:12px 14px;border:3px solid var(--ink);border-radius:14px;background:var(--sun);font-weight:700;line-height:1.3}
+.quotes li:nth-child(2){background:var(--mint);transform:rotate(-1deg)}
+.quotes li:nth-child(3){background:var(--sky)}
+.quotes small{display:block;margin-top:8px;font-family:var(--hand);font-weight:400;font-size:1.05rem;line-height:1.3}
+.sign{font-family:var(--hand);font-size:1.5rem;text-align:right;line-height:1.2}
+.more{align-self:center;background:var(--pink);color:var(--paper);font-weight:900;font-size:1.1rem;padding:10px 22px;border:3px solid var(--ink);border-radius:999px;box-shadow:4px 4px 0 var(--ink)}
+.more:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:10}
+
+@media (prefers-reduced-motion:reduce){
+  .gift,.flame,.stage{animation:none}
+  .gift .lid{transition:none}
+}
+</style>
+
+</head>
+<body>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<main class="app">
+  <section class="stage" id="s-gift">
+    <p class="big">Стигло ти је нешто!</p>
+    <button class="gift" id="gift" aria-label="Отвори поклон">
+      <span class="box"></span>
+      <span class="lid"><span class="bow"></span></span>
+    </button>
+    <p class="hint">Додирни поклон да га отвориш</p>
+  </section>
+
+  <section class="stage" id="s-cake" hidden>
+    <p class="big">Замисли жељу и дуни свећице</p>
+    <div class="cake">
+      <div class="candles">
+        <button class="candle" aria-label="Угаси свећицу 1"><span class="stick"></span><span class="flame"></span></button>
+        <button class="candle" aria-label="Угаси свећицу 2"><span class="stick"></span><span class="flame"></span></button>
+        <button class="candle" aria-label="Угаси свећицу 3"><span class="stick"></span><span class="flame"></span></button>
+        <button class="candle" aria-label="Угаси свећицу 4"><span class="stick"></span><span class="flame"></span></button>
+        <button class="candle" aria-label="Угаси свећицу 5"><span class="stick"></span><span class="flame"></span></button>
+      </div>
+      <div class="tier t2"></div>
+      <div class="tier t1"></div>
+      <div class="plate"></div>
+    </div>
+    <p class="hint" id="cake-hint" aria-live="polite">Додирни сваки пламичак</p>
+  </section>
+
+  <section class="stage" id="s-card" hidden>
+    <article class="card">
+      <p class="eyebrow">Данас је званично твој дан</p>
+      <h1>Срећан рођендан, <span>љубо!</span></h1>
+      <div class="note">
+        <p>Љубо моја! Овај дан је твој и само желим да ти прође безбрижно и беспрекорно, јер заслужујеш најмање то. Нећу пуно да пишем да те не затрпавам од раног јутра, али желим да знаш да си особа која вреди више од сваког атрибута који бих могао да ти доделим.</p>
+        <p>Желим ти да ти се врати дупло љубав коју дајеш, желим ти да увидиш себе и да више препознаш своје квалитете. Када би постојало, поклон који бих ти поклонио био би огледало за душу, да видиш колико си заиста прелепа.</p>
+        <p>Док смо гледали филм видео сам колико ти је пријао, па бих ти као подсетник за данас послао и пар реченица из филма:</p>
+      </div>
+      <ul class="quotes">
+        <li><q>Life isn’t something you earn after achieving your goals; it’s happening right now.</q></li>
+        <li><q>Ordinary moments can be extraordinary if you’re present enough to notice them.</q><small>Ову си ти мени цитирала пре него што смо гледали филм, само мало другачије.</small></li>
+        <li><q>Don’t become so obsessed with your destination that you forget to experience the journey.</q></li>
+      </ul>
+
+      <p class="sign">Воли те,<br>Твој Лука</p>
+      <button class="more" id="more">Још конфета!</button>
+    </article>
+  </section>
+</main>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const stages = { gift: $('#s-gift'), cake: $('#s-cake'), card: $('#s-card') };
+  const show = name => { for (const k in stages) stages[k].hidden = k !== name; };
+
+  /* konfete */
+  const cv = $('#confetti'), cx = cv.getContext('2d');
+  const colors = ['#FF4F9A', '#3DD6B5', '#FF8A3D', '#7CC8FF', '#2A1240', '#FFFDF6'];
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let parts = [], running = false;
+  const size = () => {
+    const d = window.devicePixelRatio || 1;
+    cv.width = innerWidth * d; cv.height = innerHeight * d;
+    cx.setTransform(d, 0, 0, d, 0, 0);
+  };
+  size(); addEventListener('resize', size);
+
+  function burst(x, y, n) {
+    if (still) return;
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2, s = 4 + Math.random() * 9;
+      parts.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 6, r: Math.random() * 6, vr: (Math.random() - .5) * .3,
+        w: 6 + Math.random() * 6, h: 5 + Math.random() * 5, c: colors[i % colors.length], t: 0 });
+    }
+    if (!running) { running = true; requestAnimationFrame(tick); }
+  }
+  function tick() {
+    cx.clearRect(0, 0, innerWidth, innerHeight);
+    parts = parts.filter(p => p.y < innerHeight + 30 && p.t < 420);
+    for (const p of parts) {
+      p.vy += .28; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.t++;
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.r); cx.fillStyle = p.c;
+      cx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * Math.abs(Math.cos(p.t * .12)) + 1);
+      cx.restore();
+    }
+    if (parts.length) requestAnimationFrame(tick);
+    else { running = false; cx.clearRect(0, 0, innerWidth, innerHeight); }
+  }
+  const center = el => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 3]; };
+
+  /* 1. poklon */
+  $('#gift').addEventListener('click', e => {
+    const g = e.currentTarget;
+    if (g.classList.contains('open')) return;
+    g.classList.add('open');
+    burst(...center(g), 140);
+    setTimeout(() => show('cake'), still ? 300 : 1200);
+  });
+
+  /* 2. svećice */
+  const candles = [...document.querySelectorAll('.candle')];
+  let left = candles.length;
+  candles.forEach(c => c.addEventListener('click', () => {
+    if (c.classList.contains('out')) return;
+    c.classList.add('out');
+    const puff = document.createElement('span'); puff.className = 'smoke'; c.appendChild(puff);
+    left--;
+    $('#cake-hint').textContent = left === 0 ? 'Жеља је замишљена!' : left === 1 ? 'Још једна!' : `Још ${left} свећице`;
+    if (left === 0) setTimeout(() => {
+      show('card'); window.scrollTo(0, 0);
+      burst(innerWidth / 2, innerHeight / 3, 220);
+    }, still ? 300 : 1000);
+  }));
+
+  $('#more').addEventListener('click', e => burst(...center(e.currentTarget), 160));
+})();
+</script>
+
+</body>
+</html>
